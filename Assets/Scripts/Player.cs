@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-	public Helicopter helicopter;
 	public Transform playerSpawnPoints; // the parent of the spawn points
+	public GameObject landingAreaPrefab;
 
 	private bool reSpawn = false;
 	private Transform[] spawnPoints;
-	private bool lastToggle = false;
+	private bool lastRespawnToggle = false;
 
 	// Use this for initialization
 	void Start () {
@@ -18,11 +18,11 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (lastToggle != reSpawn) {
+		if (lastRespawnToggle != reSpawn) {
 			Respawn ();
 			reSpawn = false;
 		}else {
-			lastToggle = reSpawn;
+			lastRespawnToggle = reSpawn;
 		}
 			
 	}
@@ -32,7 +32,13 @@ public class Player : MonoBehaviour {
 		transform.position = spawnPoints [i].transform.position;
 	}
 
-	public void OnFindClearArea(){
-		helicopter.Call ();
+	void OnFindClearArea(){
+		Invoke ("DropFlare", 3f);
+	}
+
+	void DropFlare (){
+		Vector3 flarePos = new Vector3(transform.position.x, transform.position.y - 0.9f, transform.position.z);
+		Instantiate (landingAreaPrefab, flarePos, transform.rotation);
 	}
 }
+

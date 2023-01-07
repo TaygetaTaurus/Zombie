@@ -5,7 +5,10 @@ using UnityEngine;
 public class ClearArea : MonoBehaviour {
 
 
-	private float timeSinceLastTrigger = 0f;
+	public float timeSinceLastTrigger = 0f;
+
+	private bool foundClearArea = false;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -15,12 +18,15 @@ public class ClearArea : MonoBehaviour {
 	void Update () {
 		timeSinceLastTrigger += Time.deltaTime;
 
-		if (timeSinceLastTrigger > 1f) {
+		if (!foundClearArea && timeSinceLastTrigger > 1f && Time.realtimeSinceStartup > 1f) {
 			SendMessageUpwards ("OnFindClearArea");
+			foundClearArea = true;
 		}
 	}
 
-	public void OnTriggerStay(){
-		timeSinceLastTrigger = 0f;
+	public void OnTriggerStay(Collider collider){
+		if (collider.tag != "Player") {
+			timeSinceLastTrigger = 0f;
+		}
 	}
 }

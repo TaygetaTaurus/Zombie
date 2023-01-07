@@ -7,11 +7,6 @@ public class Daycycle : MonoBehaviour {
 	[Tooltip("Количество минут в секунду")]
 	public float minutesPerSecond = 60;
 
-	// Use this for initialization
-	void Start () {
-
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		float angleThisFrame = Time.deltaTime/360 * minutesPerSecond;
