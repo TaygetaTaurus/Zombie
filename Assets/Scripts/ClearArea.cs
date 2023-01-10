@@ -18,7 +18,7 @@ public class ClearArea : MonoBehaviour {
 	void Update () {
 		timeSinceLastTrigger += Time.deltaTime;
 
-		if (!foundClearArea && timeSinceLastTrigger > 1f && Time.realtimeSinceStartup > 1f) {
+		if (!foundClearArea && timeSinceLastTrigger > 2f && Time.realtimeSinceStartup > 10f && Input.GetButton("Call heli")) {
 			SendMessageUpwards ("OnFindClearArea");
 			foundClearArea = true;
 		}

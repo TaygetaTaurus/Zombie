@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void OnFindClearArea(){
-		Invoke ("DropFlare", 3f);
+		Invoke ("DropFlare", 1f);
 	}
 
 	void DropFlare (){

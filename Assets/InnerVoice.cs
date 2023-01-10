@@ -13,17 +13,22 @@ public class InnerVoice : MonoBehaviour {
 	void Start () {
 		audioSource = GetComponent<AudioSource> ();
 		audioSource.clip = whatHappened;
-		audioSource.Play ();
+		Invoke ("PlaySound", 1f);
+
 	}
 	
 	void OnFindClearArea (){
 		audioSource.clip = goodLandingArea;
 		audioSource.Play ();
 
-		Invoke ("CallHeli", goodLandingArea.length - 3f);
+		Invoke ("CallHeli", goodLandingArea.length + 1f);
 	}
 
 	void CallHeli(){
 		SendMessageUpwards ("OnMakeInitialHeliCall");
+	}
+
+	void PlaySound (){
+		audioSource.Play ();
 	}
 }
